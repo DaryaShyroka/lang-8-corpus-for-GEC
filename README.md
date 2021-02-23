@@ -8,4 +8,5 @@
 - Project Status: Contains the latest information about the project status.
 
   a. Wiki: contains relevant websites for the project such as team contract document, link to the deep note, link to the project proposal.
+  
   b. Project_Journal: contains the meeting summary, the next steps and the questions answered / discussed. 
