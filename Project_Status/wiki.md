@@ -20,4 +20,8 @@ https://github.ubc.ca/MDS-CL-2020-21/COLX525_project_group
 
 ## Weekly Zoom meetings
 
-https://us04web.zoom.us/meeting/upIudeirqTgsGd2c_eX9BuOJebaN21KMG_9L/ics?icsToken=98tyKu6urTkrGdOWthqOR7YAA4jod-nwtnZdjacPnyDgO3lxdyzcM-BDHOAuO_X3
+https://us04web.zoom.us/j/76321373639?pwd=QXJtOEk2bkhkTTgwcDhxelAzOTlvUT09
+
+## Meeting with mentor Zoom link
+
+https://ubc.zoom.us/j/68576953308?pwd=aGZwNzZVVEtXamR4OE82QXQvOE1wQT09
