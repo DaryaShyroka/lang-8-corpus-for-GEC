@@ -17,3 +17,7 @@ https://deepnote.com/project/875ba543-d25b-472b-8d24-6b66d0b25645#%2Fnotebook.ip
 ## Private repository
 
 https://github.ubc.ca/MDS-CL-2020-21/COLX525_project_group
+
+## Weekly Zoom meetings
+
+https://us04web.zoom.us/meeting/upIudeirqTgsGd2c_eX9BuOJebaN21KMG_9L/ics?icsToken=98tyKu6urTkrGdOWthqOR7YAA4jod-nwtnZdjacPnyDgO3lxdyzcM-BDHOAuO_X3
