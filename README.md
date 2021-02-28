@@ -1,5 +1,7 @@
 # COLX523_Project_Group_6
 
+**For milestone 1, please see the directories: Milestone_1 and src. The rest of the directories are for the use of the team only.**
+
 This repository contains the following directories.
 
 1) Milestone_1: contains project deliverables for Milestone 1.  
@@ -16,7 +18,7 @@ This repository contains the following directories.
 
 4) Milestone_4: To be useds in the fourth week of Block 5.please ignore it for now.
 
-5) Project References: Contains reference information related to the project content.
+5) Project References: Contains reference information related to the project content. This is for the use of the team only. (This is not for submission for grading.)
 
     a. Bryant_final-times_submission-edited.pdf 
     
@@ -28,9 +30,9 @@ This repository contains the following directories.
     
     e. readme.pdf: This is a paper from University Singpore on builiding a large automated Corpus of Learner english.
     
-6) Project Status: Contains the latest information about the project status.
+6) Project Status: Contains the latest information about the project status. This is for the use of the team only. (This is not for submission for grading.)
 
-    a. Project_Journal: contains the meeting summary, the next steps and the questions answered / discussed.
+    a. Project_Journal: contains the meeting summary, the next steps and the questions answered / discussed. This is for the use of the team only. This file is not an official summary of contribution - it is just a simple summary of what has been discussed and what tasks are to be done. 
 
     b. Questions.ipynb: Collection of questions we would like to discuss in the team meeting and in the mentor meeting
     
