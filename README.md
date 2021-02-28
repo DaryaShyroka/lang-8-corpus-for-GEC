@@ -4,7 +4,7 @@ This repository contains the following directories.
 
 1) Milestone_1: contains project deliverables for Milestone 1.  
 
-   a. POC-README.ipynb : Please read this file for data and codes stored in src directory. 
+   a. POC-README.ipynb : Please read this file for data and codes stored in src directory. This file also contains the step-by-step algorithm for creating the corpus. 
    
    b. Project proposal.ipynb : Project proposal
    
