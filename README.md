@@ -6,13 +6,13 @@
 
 This repository contains the following directories.
 
-1) Milestone_1: contains project deliverables for Milestone 1.  
+**1) Milestone_1: contains project deliverables for Milestone 1.  **
 
-   a. POC-README.ipynb : Please read this file for data and codes stored in src directory. This file also contains the step-by-step algorithm for creating the corpus. 
+   **a. POC-README.ipynb : Please read this file for data and codes stored in src directory. This file also contains the step-by-step algorithm for creating the corpus. 
    
-   b. Project proposal.ipynb : Project proposal
+   **b. Project proposal.ipynb : Project proposal
    
-   c. Teamwork_contract.ipynb : Teamwork contract document
+   **c. Teamwork_contract.ipynb : Teamwork contract document
 
 2) Milestone_2: To be useds in the second week of Block 5. please ignore it for now.
 
@@ -40,4 +40,4 @@ This repository contains the following directories.
     
     c. Wiki: contains relevant websites for the project such as team contract document, link to the deep note, link to the project proposal.
     
-7) src: contains the Python code for the milestone. Please see Milestone_1/POC-README.ipynb for details. 
+**7) src: contains the Python code for the milestone. Please see Milestone_1/POC-README.ipynb for details. **
