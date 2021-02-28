@@ -1,6 +1,8 @@
 # COLX523_Project_Group_6
 
-**For milestone 1, please see the directories: Milestone_1 and src. The rest of the directories are for the use of the team only.**
+**For milestone 1, please see the directories: Milestone_1 and src.**
+
+**The rest of the directories are for the use of the team only.**
 
 This repository contains the following directories.
 
