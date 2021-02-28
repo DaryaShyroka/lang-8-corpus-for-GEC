@@ -1,1 +1,0 @@
-# README file for src directory: This directory contains codes of each milestone. 
