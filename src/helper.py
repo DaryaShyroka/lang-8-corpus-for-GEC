@@ -25,17 +25,20 @@ def get_profile(soup):
     return metadata
 
 
-def get_friends(soup):
+def get_friends(soup, n = 20):
     """Get list of friend ids (only English learners)
 
     Args:
         soup (BeautifulSoup): BeautifulSoup object containing link to a user's friend-list
+        n (int, optional): Number of friends needed to get. Defaults to 20.
 
     Returns:
         list: list of integers/friend_ids
     """
     friends = []
     for friend in soup.find_all("div", {"class": "language_box f_left"}):
+        if len(friends) == n:
+            return friends
         if "english" in friend.find("li", {"class": "studying"}).text.strip().lower():
             friends.append(friend.contents[1]["href"][1:])
     next_page = soup.find('li',{'class':'pager_next'})
@@ -44,29 +47,30 @@ def get_friends(soup):
         href = next_page.contents[0]["href"]
         try:
             new_soup = BeautifulSoup(urlopen('https://lang-8.com' + href), 'html.parser')
-            if len(friends) == 20:
-                return friends
-            friends.extend(get_friends(new_soup))
+            friends.extend(get_friends(new_soup, n - len(friends)))
         except:
             pass
     return friends
 
 
-def get_documents(soup):
+def get_documents(soup, n = 20):
+    
     """Get list of document/journal ids (only English journals)
 
     Args:
         soup (BeautifulSoup): BeautifulSoup object containing link to a user's journals list
+        n (int, optional): Number of documents needed to get. Defaults to 20.
 
     Returns:
         list: list of integers/document_ids
     """
     documents = []
     for container in soup.find_all("div", {"class": "journals_flex"}):
+        if len(container) == n:
+            return documents
         doc_lang = container.find("li", {"class": "studying"}).text.strip().lower()
         if("english" == doc_lang.lower()):
-            doc_id = container.find_all("a")[1]["href"].rsplit("/", 1)[-1]
-            
+            doc_id = container.find_all("a")[1]["href"].rsplit("/", 1)[-1]            
             documents.append(doc_id)
     next_page = soup.find('li',{'class':'pager_next'})
     if next_page:
@@ -76,7 +80,7 @@ def get_documents(soup):
             new_soup = BeautifulSoup(urlopen('https://lang-8.com' + href), 'html.parser')
             if len(documents) == 20:
                 return documents
-            documents.extend(get_documents(new_soup))
+            documents.extend(get_documents(new_soup, n - len(documents)))
         except:
             pass
     return documents
