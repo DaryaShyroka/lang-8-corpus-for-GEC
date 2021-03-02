@@ -43,12 +43,14 @@ def get_friends(soup):
         time.sleep(1)
         href = next_page.contents[0]["href"]
         try:
-            print('https://lang-8.com' + href)
             new_soup = BeautifulSoup(urlopen('https://lang-8.com' + href), 'html.parser')
+            if len(friends) == 20:
+                return friends
             friends.extend(get_friends(new_soup))
         except:
             pass
     return friends
+
 
 def get_documents(soup):
     """Get list of document/journal ids (only English journals)
@@ -72,11 +74,12 @@ def get_documents(soup):
         href = next_page.contents[0]["href"]
         try:
             new_soup = BeautifulSoup(urlopen('https://lang-8.com' + href), 'html.parser')
+            if len(documents) == 20:
+                return documents
             documents.extend(get_documents(new_soup))
         except:
             pass
     return documents
-
 
 def get_corrections(soup):
     """Get list of tagged original-corrected sentences from a document
