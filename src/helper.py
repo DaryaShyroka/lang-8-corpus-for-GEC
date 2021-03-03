@@ -10,6 +10,12 @@ import pdb
 
 
 def get_profile(soup):
+    """Get dictionary of a user's metadata
+    Args:
+        soup (BeautifulSoup): BeautifulSoup object containing link to a user's friend-list
+    Returns:
+        ditionary: dictionary of key = user_id, value = metadata/profile_info
+    """
     metadata = {}
     for profile in soup.find_all("div", {"class": "user_profile_row"}):
         subtitle = profile.find("div", {"class": "subtitle"})
@@ -18,46 +24,90 @@ def get_profile(soup):
 
 
 def get_friends(soup):
+    """Get list of friend ids (only English learners)
+    Args:
+        soup (BeautifulSoup): BeautifulSoup object containing link to a user's friend-list
+    Returns:
+        list: list of integers/friend_ids
+    """
     friends = []
     for friend in soup.find_all("div", {"class": "language_box f_left"}):
-        if "english" == friend.find("li", {"class": "studying"}).text.strip().lower():
+        if "english" in friend.find("li", {"class": "studying"}).text.strip().lower():
             friends.append(friend.contents[1]["href"][1:])
-    # next_page = soup.find('li',{'class':'pager_next'})
-    # if next_page:
-    #     time.sleep(1)
-    #     print(next_page)
-    #     href = next_page.contents[0]["href"]
-    #     try:
-    #         new_soup = BeautifulSoup(urlopen('https://lang-8.com' + href), 'html.parser')
-    #         friends.extend(get_friends(new_soup))
-    #     except:
-    #         pass
+    next_page = soup.find('li',{'class':'pager_next'})
+    if next_page:
+        time.sleep(1)
+        href = next_page.contents[0]["href"]
+        try:
+            new_soup = BeautifulSoup(urlopen('https://lang-8.com' + href), 'html.parser')
+            if len(friends) == 20:
+                return friends
+            friends.extend(get_friends(new_soup))
+        except:
+            pass
     return friends
 
 
 def get_documents(soup):
+    """Get list of document/journal ids (only English journals)
+    Args:
+        soup (BeautifulSoup): BeautifulSoup object containing link to a user's journals list
+    Returns:
+        list: list of integers/document_ids
+    """
     documents = []
-    for doc in soup.find_all("h3", {"class": "journal_title"}):
-        doc_id = doc.contents[1]["href"].rsplit("/", 1)[-1]
-        documents.append(doc_id)
-    # next_page = soup.find('li',{'class':'pager_next'})
-    # if next_page:
-    #     time.sleep(1)
-    #     href = next_page.contents[0]["href"]
-    #     try:
-    #         new_soup = BeautifulSoup(urlopen('https://lang-8.com' + href), 'html.parser')
-    #         documents.extend(get_documents(new_soup))
-    #     except:
-    #         pass
+    for container in soup.find_all("div", {"class": "journals_flex"}):
+        doc_lang = container.find("li", {"class": "studying"}).text.strip().lower()
+        if("english" == doc_lang.lower()):
+            doc_id = container.find_all("a")[1]["href"].rsplit("/", 1)[-1]
+            
+            documents.append(doc_id)
+    next_page = soup.find('li',{'class':'pager_next'})
+    if next_page:
+        time.sleep(1)
+        href = next_page.contents[0]["href"]
+        try:
+            new_soup = BeautifulSoup(urlopen('https://lang-8.com' + href), 'html.parser')
+            if len(documents) == 20:
+                return documents
+            documents.extend(get_documents(new_soup))
+        except:
+            pass
     return documents
 
-
 def get_corrections(soup):
+    """Get list of tagged original-corrected sentences from a document
+    Args:
+        soup (BeautifulSoup): BeautifulSoap object containing a link with user_id and the user's journal_id
+    Returns:
+        list: list of Tag elements
+    """
     comments_field = soup.find("div", {"id": "comments_and_corrections_field"})
     return comments_field.find_all("div", {"class": "correction_box"})
 
+def get_pair_sents(corrections):
+    """Get defaultdict of original-corrected sentences. Corrected sentences are in list. Corrections are made by Lang8 users
+    Args:
+        corrections (list of Tags): list containing Tag elements
+    Returns:
+        defaultdict: dictionary of original-corrected sentences
+    """
+    pair_sents = defaultdict(list)
+    for cor in corrections:
+        ref = cor.find("li", {"class": "corrected correct"})
+        if ref:
+            org = cor.find("li", {"class": "incorrect"}).get_text()
+            ref = get_corrected_sentence(ref.find("p"))
+            pair_sents[org].append(ref)
+    return pair_sents
 
 def get_corrected_sentence(p):
+    """Get nth corrected sentence made for original sentence
+    Args:
+        p (Tag): Tag containing a corrected sentence
+    Returns:
+        String: corrected sentence
+    """
     if not p.find("span", {"class": "sline"}):
         return p.get_text().strip()
     else:
@@ -71,14 +121,3 @@ def get_corrected_sentence(p):
                 if not comp.find("span", {"class": "sline"}):
                     sent += comp.get_text()
         return sent
-
-
-def get_pair_sents(corrections):
-    pair_sents = defaultdict(list)
-    for cor in corrections:
-        ref = cor.find("li", {"class": "corrected correct"})
-        if ref:
-            org = cor.find("li", {"class": "incorrect"}).get_text()
-            ref = get_corrected_sentence(ref.find("p"))
-            pair_sents[org].append(ref)
-    return pair_sents
