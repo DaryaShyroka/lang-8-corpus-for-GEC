@@ -66,7 +66,7 @@ def get_documents(soup, n = 20):
     """
     documents = []
     for container in soup.find_all("div", {"class": "journals_flex"}):
-        if len(container) == n:
+        if len(documents) == n:
             return documents
         doc_lang = container.find("li", {"class": "studying"}).text.strip().lower()
         if("english" == doc_lang.lower()):
@@ -78,8 +78,6 @@ def get_documents(soup, n = 20):
         href = next_page.contents[0]["href"]
         try:
             new_soup = BeautifulSoup(urlopen('https://lang-8.com' + href), 'html.parser')
-            if len(documents) == 20:
-                return documents
             documents.extend(get_documents(new_soup, n - len(documents)))
         except:
             pass
