@@ -1,4 +1,4 @@
-# README file for Milestone 2
+# Instruction for how to run corpus collection (Milestone 2)
 
 - Corpus collection:
     - Corpus scraping instruction:
