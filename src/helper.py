@@ -7,6 +7,7 @@ from urllib.request import urlopen
 from collections import defaultdict
 import re
 import pdb
+import pandas as pd 
 
 
 def get_profile(soup):
@@ -135,3 +136,31 @@ def get_corrected_sentence(p):
                 if not comp.find("span", {"class": "sline"}):
                     sent += comp.get_text()
         return sent
+
+def remove_duplicates(df, inplace = False):
+    """Removes all duplicates from the Dataframe, but the first one 
+
+    Args:
+        df (Dataframe): pandas Dataframe
+        inplace: if True -> alters the given df, if False (default) -> creates a new df
+        n: numbers of characters to query in original sentences
+    Returns:
+        Dataframe: if inplace=False (default)
+        None: if inplace=True
+    """
+    df.columns = ['user_id', 'doc_id', 'original', 'correct']
+    return df.drop_duplicates(keep='first', inplace = inplace)
+
+def remove_n_less_sents(df, inplace = False, n = 4):
+    """Removes rows from the Dataframe where number of characters in 'original' is less than n 
+
+    Args:
+        df (Dataframe): pandas Dataframe
+        inplace: if True -> alters the given df, if False (default) -> creates a new df
+        n: numbers of characters to query in original sentences
+    Returns:
+        Dataframe: if inplace=False (default)
+        None: if inplace=True
+    """
+    df.columns = ['user_id', 'doc_id', 'original', 'correct']
+    return df.drop(df[df.original.str.len() < n].index, inplace = inplace)
