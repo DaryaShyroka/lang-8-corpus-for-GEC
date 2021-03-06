@@ -1,7 +1,7 @@
 ### Link to the corpus: 
-    1. parallel sentences: https://raw.github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/jeremy/src/data/clean_paral_sents.csv?token=AAAARHVJLTFPFFSZWADSIHDAJTXK6
-
-    2. metadata: https://raw.github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/jeremy/src/data/lang-8-users.csv?token=AAAARHWITQ6H4IREDEQKVNTAJTX7U
+    1. parallel sentences: https://raw.github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/master/src/data/clean_paral_sents.csv?token=AAAARHXRZG4GO2M2QR6YBDTAJUT3A
+    
+    2. metadata: https://raw.github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/master/src/data/lang-8-users.csv?token=AAAARHUGEVEKKHAPDACK2RLAJUT3E
 
 ### Format: 2 csv files
     1. clean_paral_sents.csv
