@@ -6,7 +6,6 @@ import bs4
 from urllib.request import urlopen
 from collections import defaultdict
 import re
-import pdb
 
 
 def get_profile(soup):
@@ -23,15 +22,18 @@ def get_profile(soup):
     return metadata
 
 
-def get_friends(soup):
+def get_friends(soup, n = 20):
     """Get list of friend ids (only English learners)
     Args:
         soup (BeautifulSoup): BeautifulSoup object containing link to a user's friend-list
+        n (int, optional): Number of friends needed to get. Defaults to 20.
     Returns:
         list: list of integers/friend_ids
     """
     friends = []
     for friend in soup.find_all("div", {"class": "language_box f_left"}):
+        if len(friends) == n:
+            return friends
         if "english" in friend.find("li", {"class": "studying"}).text.strip().lower():
             friends.append(friend.contents[1]["href"][1:])
     next_page = soup.find('li',{'class':'pager_next'})
@@ -40,37 +42,37 @@ def get_friends(soup):
         href = next_page.contents[0]["href"]
         try:
             new_soup = BeautifulSoup(urlopen('https://lang-8.com' + href), 'html.parser')
-            if len(friends) == 20:
-                return friends
-            friends.extend(get_friends(new_soup))
+            friends.extend(get_friends(new_soup, n - len(friends)))
         except:
             pass
     return friends
 
 
-def get_documents(soup):
+def get_documents(soup, n = 20):
+    
     """Get list of document/journal ids (only English journals)
     Args:
         soup (BeautifulSoup): BeautifulSoup object containing link to a user's journals list
+        n (int, optional): Number of documents needed to get. Defaults to 20.
     Returns:
         list: list of integers/document_ids
     """
     documents = []
     for container in soup.find_all("div", {"class": "journals_flex"}):
-        doc_lang = container.find("li", {"class": "studying"}).text.strip().lower()
-        if("english" == doc_lang.lower()):
-            doc_id = container.find_all("a")[1]["href"].rsplit("/", 1)[-1]
-            
-            documents.append(doc_id)
+        if container:
+            if len(documents) == n:
+                return documents
+            doc_lang = container.find("li", {"class": "studying"}).text.strip().lower()
+            if("english" == doc_lang.lower()):
+                doc_id = container.find_all("a")[1]["href"].rsplit("/", 1)[-1]            
+                documents.append(doc_id)
     next_page = soup.find('li',{'class':'pager_next'})
     if next_page:
         time.sleep(1)
         href = next_page.contents[0]["href"]
         try:
             new_soup = BeautifulSoup(urlopen('https://lang-8.com' + href), 'html.parser')
-            if len(documents) == 20:
-                return documents
-            documents.extend(get_documents(new_soup))
+            documents.extend(get_documents(new_soup, n - len(documents)))
         except:
             pass
     return documents
@@ -83,7 +85,9 @@ def get_corrections(soup):
         list: list of Tag elements
     """
     comments_field = soup.find("div", {"id": "comments_and_corrections_field"})
-    return comments_field.find_all("div", {"class": "correction_box"})
+    if comments_field:
+        return comments_field.find_all("div", {"class": "correction_box"})
+    return None
 
 def get_pair_sents(corrections):
     """Get defaultdict of original-corrected sentences. Corrected sentences are in list. Corrections are made by Lang8 users
@@ -93,12 +97,13 @@ def get_pair_sents(corrections):
         defaultdict: dictionary of original-corrected sentences
     """
     pair_sents = defaultdict(list)
-    for cor in corrections:
-        ref = cor.find("li", {"class": "corrected correct"})
-        if ref:
-            org = cor.find("li", {"class": "incorrect"}).get_text()
-            ref = get_corrected_sentence(ref.find("p"))
-            pair_sents[org].append(ref)
+    if corrections:
+        for cor in corrections:
+            ref = cor.find("li", {"class": "corrected correct"})
+            if ref:
+                org = cor.find("li", {"class": "incorrect"}).get_text()
+                ref = get_corrected_sentence(ref.find("p"))
+                pair_sents[org].append(ref)
     return pair_sents
 
 def get_corrected_sentence(p):
@@ -121,3 +126,27 @@ def get_corrected_sentence(p):
                 if not comp.find("span", {"class": "sline"}):
                     sent += comp.get_text()
         return sent
+    
+def remove_duplicates(df, subset, inplace = False):
+    """Removes all duplicates from the Dataframe, but the first one 
+    Args:
+        df (Dataframe): pandas Dataframe
+        subset (list): A list of columns to search for duplicates
+        inplace (boolean): if True -> alters the given df, if False (default) -> creates a new df
+    Returns:
+        Dataframe: if inplace=False (default)
+        None: if inplace=True
+    """
+    return df.drop_duplicates(keep='first', subset=subset, inplace = inplace)
+
+def remove_n_less_sents(df, inplace = False, n = 4):
+    """Removes rows from the Dataframe where number of characters in 'original' is less than n 
+    Args:
+        df (Dataframe): pandas Dataframe
+        inplace: if True -> alters the given df, if False (default) -> creates a new df
+        n: numbers of characters to query in original sentences
+    Returns:
+        Dataframe: if inplace=False (default)
+        None: if inplace=True
+    """
+    return df.drop(df[df.original.str.len() < n].index, inplace = inplace)
