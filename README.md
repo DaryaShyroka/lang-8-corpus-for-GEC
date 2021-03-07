@@ -4,7 +4,7 @@
 
 **The rest of the directories are for the use of the team only.**
 
-- Please see Milestone_2/how_to_run.md to run the corpus collection code. https://github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/blob/master/Milestone_2/how_to_run.md
+- Please see Milestone_2/scraping_instruction.md to run the corpus collection code. https://github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/blob/master/Milestone_2/scraping_instruction.md
 
 - Link to the Corpus collection code: https://github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/blob/master/src/scraper.ipynb
 
