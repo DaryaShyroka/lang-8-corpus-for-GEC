@@ -1,16 +1,12 @@
 # COLX523_Project_Group_6
 
-**For milestone 2, please see the directories: Milestone_2 and src.**
+**For milestone 3, please see the directories: Milestone_3 and src.**
 
 **The rest of the directories are for the use of the team only.**
 
-- Please see Milestone_2/scraping_instruction.md to run the corpus collection code. https://github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/blob/master/Milestone_2/scraping_instruction.md
+- Please see Milestone_3/Annotations/Annotation_explanation.ipynb for Annotation + explanation + code. 
 
-- Link to the Corpus collection code: https://github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/blob/master/src/scraper.ipynb
+- Please see Milestone_3/Interannotator_Agreement_Study/Interannotator_agreement.ipynb for Interannotator agreement study. 
 
-- Corpus and Explanation: Please see corpus_readme.md file in **Milestone_2 directory**. https://github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/blob/master/Milestone_2/corpus_readme.md
-
-- Annotation Plan: Please see the files in **Milestone_2/Annotation_Plan** directory.
-
-- Annotation Materials: Please see the files in **Milestone_2/Annotation_Materials** directory. 
+- Please see Milestone_3/Interface/Interface_plan.md for plan for the interface.
 
