@@ -6,6 +6,17 @@ import bs4
 from urllib.request import urlopen
 from collections import defaultdict
 import re
+import pandas as pd
+
+CORPUS = pd.read_csv("data/clean_paral_sents.csv", encoding="utf-8").set_index("ID")
+
+def get_dict_corpus(size = 10):
+    return CORPUS[:size].T.to_dict('list')
+
+def get_by_range(sent_type, range = (10, 15)):
+    mask =  (CORPUS[sent_type].str.len() >= range[0]) & (CORPUS[sent_type].str.len() <= range[1])
+    return CORPUS.loc[mask].T.to_dict('list')
+
 
 
 def get_profile(soup):
