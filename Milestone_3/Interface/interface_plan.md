@@ -7,8 +7,10 @@
         - Reasons: Users might be interested in how length of the sentence interacts with the number of grammar errors.
     - Metadata search:
         - Input: Boolean operator combined with metadata headers, for example, sex, occupation, location, Lpoints and so on.
+	(Note: Every time you make corrections or receive Thanks points, you get more L points. The more L points you have, the higher your posts will be listed, making them more likely to be corrected)
         - Output: return sentence pairs where it matches the author with those given metadata
         - Reasons: Users might be interested in if a subgroup of people will make similar grammar errors consistently.
+		- Percentage of corpus having such attributes: sex - 47.1%, occupation - 22.47%, lpoints - 99.96%, nation_region - 43.67%, location - 42.3%, age - 27.42%
     - Multiple corrections search:
         - Input: an int to indicate how many correct sentences a sentence has
         - Output: return sentences which have that many of corrected versions
