@@ -2,7 +2,7 @@
 
 1. Start the Docker app on your computer.
 
-2. Build the Docker image for our web application using the command below, replacing `<image_name>` with the name you choose to give our Docker image:
+2. Build the Docker image for our web application using the command below, replacing `<image_name>` with the name you choose to give our Docker image (don't forget the '.' at the end!):
 
 ```  docker build -t <image_name> .```
 
