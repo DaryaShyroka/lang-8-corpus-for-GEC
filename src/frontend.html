@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="frontend.css"> 
+  
+</head>
+
+<body>
+  <div id="app" class="container-fluid">
+    <div class="row">
+      <!-- Search column -->
+      <div class="col-xs-5 col-sm-10 col-lg-2 rounded shadow search">
+        <form>
+          <!-- corpus type-->
+          <div class="form-group" :title="corpusType.description">
+            <label for="corpusType">Search from</label>
+            <select class="form-control" name="corpusType" v-model="searchData.corpusType">
+              <option v-for="(v,k) in corpusType.data" :value=v>{{k}}</option>
+            </select>
+          </div>
+          <!-- agreement type-->
+          <div class="form-group" :title="agreementType.description"
+            v-if="searchData.corpusType == -1 || searchData.corpusType == 1">
+            <label for="agreementType">Search by agreement</label>
+            <select class="form-control" name="agreementType" v-model="searchData.agreementType">
+              <option v-for="(v,k) in agreementType.data" :value=v>{{k}}</option>
+            </select>
+          </div>
+          <hr>
+          <!-- word range-->
+          <div class="form-group" title="Word range of the returned sentences">
+            <label>Word range</label>
+            <br>
+            <input type="checkbox" v-model="anyWordRange" id="anyWordRange">
+            <label for="anyWordRange">doesn't matter</label>
+            <input type="number" class="form-control" id="fromRange" placeholder="from"
+              v-model="searchData.wordRange[0]" :disabled="anyWordRange">
+            <br>
+            <input type="number" class="form-control" id="toRange" placeholder="to" v-model="searchData.wordRange[1]"
+              :disabled="anyWordRange">
+          </div>
+          <!-- sentence type-->
+          <div class="form-group" :title="sentenceType.description" v-if="!anyWordRange">
+            <div v-for="(v,k) in sentenceType.data">
+              <input type="radio" v-model="searchData.sentenceType" :value=v>
+              <label>{{k}}</label>
+            </div>
+            <small id="sentenceType" class="form-text text-muted">Choose from two sentence types or both sentence
+              types</small>
+          </div>
+          <hr>
+          <div class="form-group"
+            title="Some sentences have more than one correction. Select a number, If you want sentences with n corrections">
+            <label for="nCorrections">Sentences with n corrections</label>
+            <input type="number" class="form-control" id="nCorrections" placeholder="n"
+              v-model="searchData.nCorrections" :disabled="anyNcorrections">
+            <input type="checkbox" v-model="anyNcorrections" id="anyNcorrections">
+            <label for="anyNcorrections">doesn't matter</label>
+          </div>
+
+          <!-- sex, occupation, location, Lpoints -->
+          <div class="form-group" :title="sex.description">
+            <label for="sex">Sex</label>
+            <select class="form-control" name="sex" v-model="searchData.sex">
+              <option v-for="(v,k) in sex.data" :value=v>{{k}}</option>
+            </select>
+          </div>
+          <div class="form-group" :title="occupation.description">
+            <label for="occupation">Occupation</label>
+            <select class="form-control" name="occupation" v-model="searchData.occupation">
+              <option v-for="(v,k) in occupation.data" :value=v>{{k}}</option>
+            </select>
+          </div>
+          <div class="form-group" :title="location.description">
+            <label for="location">Location</label>
+            <select class="form-control" name="location" v-model="searchData.location">
+              <option v-for="(v,k) in location.data" :value=v>{{k}}</option>
+            </select>
+          </div>
+          <div class="form-group"
+            title="Lpoints range (Lpoints is like a 'thumbs ups' a user received from other Lang8 users">
+            <label>Lpoints</label>
+            <input type="number" class="form-control" id="fromLpoint" placeholder="from" v-model="searchData.Lpoints[0]"
+              :disabled="anyLpoints">
+            <br>
+            <input type="number" class="form-control" id="toLpoint" placeholder="to" v-model="searchData.Lpoints[1]"
+              :disabled="anyLpoints">
+            <input type="checkbox" v-model="anyLpoints" id="anyLpoints">
+            <label for="anyLpoints">doesn't matter</label>
+          </div>
+          <button type="submit" class="btn btn-primary" @click="search">Submit</button>
+        </form>
+      </div>
+      <!-- Table column -->
+      <div class="col-xs-5 col-sm-6 col-lg-5 rounded shadow">
+        <div class="tableFixHead">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>original sentence</th>
+                <th>corrected sentence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>A1dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddfsfdsff
+                </td>
+                <td>A2</td>
+              </tr>
+              <tr v-for="n in 100">
+                <td>A1</td>
+                <td>A2</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- Viz column -->
+      <div class="col-xs-6 col-sm-8 col-lg-5 rounded shadow viz">
+        <div id="piechart1"></div>
+        <hr>
+        <div id="piechart2"></div>
+        <!-- <pie-chart :data="[['correct sentense pairs', 6000], ['incorrect sentense pairs', 1500]]"></pie-chart> -->
+        <hr>
+        <div id="barchart1"></div>
+        <hr>
+        <div id="regions_div"></div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+  <script language="javascript" type="text/javascript" src="frontend.js"> </script>	
+</body>
+
+</html>

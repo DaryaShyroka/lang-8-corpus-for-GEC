@@ -8,7 +8,8 @@ from collections import defaultdict
 import re
 import pandas as pd
 
-CORPUS = pd.read_csv("data/clean_paral_sents.csv", encoding="utf-8").set_index("ID")
+CORPUS = pd.read_csv("data/final_corpus.csv", encoding="utf-8").fillna('').set_index("id")
+
 
 def get_dict_corpus(size = 10):
     return CORPUS[:size].T.to_dict('list')
