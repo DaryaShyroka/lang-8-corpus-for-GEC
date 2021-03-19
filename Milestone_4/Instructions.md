@@ -13,7 +13,7 @@ REPOSITORY          TAG                 IMAGE ID            CREATED             
 lang8_image         latest              b849065aed5a        About an hour ago   1.25GB
 ```
 
-2. Create a Docker container by running the Docker image with internal and external ports both 9999:
+3. Create a Docker container by running the Docker image with internal and external ports both 9999:
 
 `docker run -p 9999:9999 <image_name>`
 
@@ -26,7 +26,7 @@ INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:9999 (Press CTRL+C to quit)
 ```
 
-3. Open your brower and type `localhost:9999` in the URL. 
+4. Open your brower and type `localhost:9999` in the URL. 
 
-4. You should see our interface displayed in the window.
+5. You should see our interface displayed in the window.
 
