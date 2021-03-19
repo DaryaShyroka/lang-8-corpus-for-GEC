@@ -147,7 +147,7 @@ def annotation_search(
     if (
         agreementType > 3
         or agreementType < -1
-        or nCorrections < 1
+        or (nCorrections != -1 and nCorrections < 1)
         or sentenceType > 1
         or sentenceType < -1
         or type(sentenceType) != int
@@ -192,9 +192,12 @@ def annotation_search(
             original_df, final_corpus, how="left", on=["original"]
         )
         take_intersection.append(extract_pair_set(original_count))
-    ss = take_intersection[0]
-    for i in range(1, len(take_intersection)):
-        ss = ss & take_intersection[i]
+    if len(take_intersection) == 0:
+        return final_corpus
+    else:
+        ss = take_intersection[0]
+        for i in range(1, len(take_intersection)):
+            ss = ss & take_intersection[i]
     return ss  # a set of pairs (original, corrected)
 
 
