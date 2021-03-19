@@ -1,2 +1,11 @@
 fastapi
 uvicorn[standard]
+#time
+#json
+#os
+bs4
+bs4
+#urllib.request
+#collections
+#re
+pandas
