@@ -2,11 +2,16 @@
 
 1. Start the Docker app on your computer.
 
-2. Build the Docker image for our web application using the command below, replacing <image_name> with the name you choose to give our Docker image:
+2. Build the Docker image for our web application using the command below, replacing `<image_name>` with the name you choose to give our Docker image:
 
 ```  docker build -t <image_name> .```
 
-Make sure the docker image has been successfully created by running `docker images` and checking the `<image_name>` is in that list, and has been recently created.
+Make sure the docker image has been successfully created by running `docker images` and checking the `<image_name>` is in that list, and has been recently created. It should look like this:
+
+``` 
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+lang8_image         latest              b849065aed5a        About an hour ago   1.25GB
+```
 
 2. Create a Docker container by running the Docker image with internal and external ports both 9999:
 
