@@ -193,7 +193,7 @@ def annotation_search(
         )
         take_intersection.append(extract_pair_set(original_count))
     if len(take_intersection) == 0:
-        return final_corpus
+        return extract_pair_set(final_corpus)
     else:
         ss = take_intersection[0]
         for i in range(1, len(take_intersection)):
