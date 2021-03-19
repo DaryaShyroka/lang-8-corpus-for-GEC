@@ -28,5 +28,5 @@ INFO:     Uvicorn running on http://0.0.0.0:9999 (Press CTRL+C to quit)
 
 3. Open your brower and type `localhost:9999` in the URL. 
 
-4. You should see our webpage displayed.
+4. You should see our interface displayed in the window.
 
