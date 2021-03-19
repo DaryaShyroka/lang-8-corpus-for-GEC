@@ -1,10 +1,8 @@
 ### How to get things working
 
-- start Docker app
+1. Start the Docker app on your computer.
 
-- Navigate to src directory
-
-1. Build the Docker image for our web application using the command, replacing <image_name> with the name you choose to give our Docker image:
+2. Build the Docker image for our web application using the command below, replacing <image_name> with the name you choose to give our Docker image:
 
 ```  docker build -t <image_name> .```
 
@@ -14,6 +12,16 @@ Make sure the docker image has been successfully created by running `docker imag
 
 `docker run -p 9999:9999 <image_name>`
 
-3. When inside the container, 
+The output you see should look like:
 
-4. 
+``` 
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:9999 (Press CTRL+C to quit)
+```
+
+3. Open your brower and type `localhost:9999` in the URL. 
+
+4. You should see our webpage displayed.
+
