@@ -8,9 +8,7 @@ from collections import defaultdict
 import re
 import pandas as pd
 
-CORPUS = (
-    pd.read_csv("data/final_corpus.csv", encoding="utf-8").fillna("").set_index("id")
-)
+CORPUS = pd.read_csv("data/final_corpus.csv", encoding="utf-8").set_index("id")
 
 METADATA = pd.read_csv(
     "data/lang-8-users.csv", encoding="utf-8", dtype={"user_id": str}
