@@ -2,9 +2,9 @@ from fastapi import FastAPI
 import uvicorn
 import helper as hp
 from fastapi.responses import FileResponse, HTMLResponse
+import ast
 
 app = FastAPI()
-
 
 @app.get("/")
 def start():
@@ -14,15 +14,32 @@ def start():
 def get_file(filename):
     return FileResponse(filename)
 
-@app.get("/corpus")
-def get_corpus(size):
-    '''Returns corpus with n size'''
-    return hp.get_dict_corpus(size = int(size))
+@app.get("/corpus/request")
+def get_sentence_pairs(
+    corpusType,
+    agreementType,
+    sentenceType,
+    wordRange,
+    nCorrections,
+    sex,
+    occupation,
+    location,
+    Lpoints,
+):
+    params = {
+        "corpusType": int(corpusType),
+        "agreementType": int(agreementType),
+        "sentenceType": int(sentenceType),
+        "wordRange": ast.literal_eval(wordRange),
+        "nCorrections": int(nCorrections),
+        "sex": int(sex),
+        "occupation": int(occupation),
+        "location": int(location),
+        "Lpoints": ast.literal_eval(Lpoints),
+    }
+    print(params)
+    return hp.get_target_sents(params)
 
-@app.get("/corpus/{sent_type}")
-def get_words_range(sent_type, start, end):
-    '''Returns rows with sentences in {start} - {end} range'''
-    return hp.get_by_range(sent_type, range = (int(start), int(end)))
 
 if __name__ == "__main__":
-    uvicorn.run(app, host='0.0.0.0', port=9999,debug=True)
+    uvicorn.run(app, host="0.0.0.0", port=9999, debug=True)
