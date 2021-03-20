@@ -2,15 +2,15 @@
 
 ## Introduction to Corpus
 
-This corpus is a collection of sentences written by non-native English speakers and corrections on these sentences offered by native English speakers. 
-These sentences are scraped from Lang-8 website, a web community of native speakers supporting language learning. 
-The user of this service can submit a sentence in a foregn language, which will be examined and corrected by another user whose native language is the language of the sentence. 
-This corpus has 75,112 pairs of original sentences and corrected sentences from the website. Of these sentences, 550 sentences are annotated by the Mechanical Turk workers whether they agree with the corrections.
-Each of these pairs are examined by three independnet workers who were asked to state whether they agree with the corrections offered in the corrected sentence. The corpus contains the number of agreements from the annotators.
-Also meta data such as location, occupation and Lpoints are available for some users. 
-The frontend allows to filter the sentences based on the annotation characterstics (such as number of annotator agreements, the number of words in the original or corrected sentences), and meta data (such as sex, occupation and the user's current location. )
+This corpus is a collection of sentences written by English-langauge learners and corrections of these sentences offered by native English speakers. These sentences are scraped from the Lang-8 website, https://lang-8.com/, a web community of native speakers supporting language learners. Lang-8 users can submit a sentence in a language that they are learning, and this sentence will be examined and corrected by another user whose native language is hopefully the language of the sentence. This corpus has 75,112 pairs of original sentences and corrected sentences from the website. 
+
+However, not all corrected sentences on Lang-8 are grammatical. Sometimes, the person correcting the sentence was not a native speaker of English, and other times, they could have just made a mistake or missed some errors in the original sentence. For this reason, we chose our annotations to be the approval of the corrections scraped from Lang-8. We asked mechanical turkers to state whether they agree with the corrections offered in the corrected sentence. The exact question was, "Does the corrected sentence correct all of the grammatical errors made in the original sentence?". We obtained 550 annotated sentences from Mechanical Turk workers, each annotated by three workers. 
+
+The corpus contains the number of agreements from the annotators, as well as metadata such as location, occupation and Lpoints for some users. 
 
 ## Filter Criteria
+
+The frontend allows to filter the sentences based on the annotation characterstics (such as number of annotator agreements, the number of words in the original or corrected sentences), and meta data (such as sex, occupation and the user's current location. )
 
 - Search from annotated corpus:
 
