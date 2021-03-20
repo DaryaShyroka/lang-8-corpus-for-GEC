@@ -10,13 +10,22 @@ The corpus contains the number of agreements from the annotators, as well as met
 
 ## Filter Criteria
 
-The frontend allows to filter the sentences based on the annotation characterstics (such as number of annotator agreements, the number of words in the original or corrected sentences), and meta data (such as sex, occupation and the user's current location. )
+The frontend allows to filter the sentences based on the annotation characterstics (such as number of annotator agreements, the number of words in the original or corrected sentences), and meta data (such as sex, occupation and the user's current location. ). The query response shows the first 500 pairs which satisfy the filter criteria. 
 
-- Search from annotated corpus:
+- Search from: 
+  Both - all pair of sentences in the corpus 
+  Unannotated Corpus - the pair of sentences unexamined by the annotators
+  Annotated Corpus - the pair of sentences examined by the annotators
+  
 
-- Search by Agreement: the number of annotators who agree with the correction. The minimum number is 0 and the maximum number is 3. 
+- Search by Agreement: Note that this section is applicable only when you select to search from Annotated corpus. This lets you choose the number of annotators who agree with the correction. 
+  All 'yes' means all three annotators agreed with the correction.
+  All 'no' means all three annotators disagreed with the correction.
+  1 'yes' 2 'no' means one annotator agreed with the correction while two did not.
+  2 'yes' 1 'no' means two annotators agreed with the correction while one did not. 
 
-- Word Range: the number of words in the sentence
+- Word Range: the number of words in the sentence. The top box is the minimum number of words and the box below is the maximum number of words in the sentence. 
+  If you specify non-positive integer, the system will give you an error. You can also click on 'Does not matter' if you don't care about the word range. 
 
 - Original or Corrected or Both: If original is checked, the filter criteria is applied to original sentences. If corrected is checked, the filter criteria is applied to corrected sentences. 
   If you check both, the filters will be applied to both original sentences and corrected sentences. 
@@ -39,6 +48,10 @@ You can combine several combination of these criteria.
 
     (Search from: annotated corpus, Search by Agreement: 3)
 
-- Example 2: you want to see the pair of original and corrected sentences originally written by a user who currently lives in U.S.A:
+- Example 2: you want to see all the pair of original and corrected sentences originally written by a user who currently lives in U.S.A:
     
-    (Search from: annotated corpus, Location: USA)
+    (Search from: Both, Location: USA)
+    
+- Exmample 3: you want to see the pair of original and corrected sentences originally written by users whose occupation is a designer that have not been examined by the annotators:
+    
+    (Search from: unannotated corpus, occupation: Designer )
