@@ -1,10 +1,18 @@
 from fastapi import FastAPI
 import uvicorn
 import helper as hp
+from fastapi.responses import FileResponse, HTMLResponse
 import ast
 
 app = FastAPI()
 
+@app.get("/")
+def start():
+    return FileResponse("frontend.html")
+
+@app.get("/{filename}")
+def get_file(filename):
+    return FileResponse(filename)
 
 @app.get("/corpus/request")
 def get_sentence_pairs(
