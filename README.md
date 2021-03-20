@@ -1,12 +1,16 @@
 # COLX523_Project_Group_6
 
-**For milestone 3, please see the directories: Milestone_3 and src.**
+**For milestone 4, please see the directories: Milestone_4 and src.**
 
 **The rest of the directories are for the use of the team only.**
 
-- Please see Milestone_3/Annotation_explanation.ipynb for Annotation + explanation + code. https://github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/blob/master/Milestone_3/Annotations_explanation.ipynb
+## Python Back-end
+- Please see Milestone_4/src/backend.py, helper.py, backend_jer.ipynb, scraper.ipynb
+                   
+## HTML / Javascript Front-end
+- Please see Milestone_4/frontend.css, frontend.html, frontend.js
+- Frontend documentation from Ali ---- add this part 
 
-- Please see Milestone_3/Interannotator_agreement.ipynb for Interannotator agreement study.  https://github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/blob/master/Milestone_3/Interannotator_agreement.ipynb
-
-- Please see Milestone_3/Interface_plan.md for plan for the interface.  https://github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/blob/master/Milestone_3/interface_plan.md
+## Dockerization and peer review instructions 
+- Please see Milestone_4/Dockerfile, requirements.txt 
 
