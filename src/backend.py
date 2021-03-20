@@ -41,7 +41,7 @@ def get_sentence_pairs(
         "Lpoints": ast.literal_eval(Lpoints),
     }
     print(params)
-    res = list(hp.get_target_sents(params))
+    res = list(sorted(hp.get_target_sents(params), key=lambda x: x[0]))
     n = len(res)
     if n < 500:
         return res[:n]

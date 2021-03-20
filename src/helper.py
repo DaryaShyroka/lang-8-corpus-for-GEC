@@ -74,16 +74,16 @@ def get_by_range(corpus, sent_type, num_range=(10, 15)):
     """
     lower, upper = num_range
     if sent_type in SENT_TYPE_MAPS:
-        mask = (corpus[SENT_TYPE_MAPS[sent_type]].str.len() >= lower) & (
-            corpus[SENT_TYPE_MAPS[sent_type]].str.len() <= upper
+        mask = (corpus[SENT_TYPE_MAPS[sent_type]].str.split().apply(len) >= lower) & (
+            corpus[SENT_TYPE_MAPS[sent_type]].str.split().apply(len) <= upper
         )
         return corpus.loc[mask]
     else:
-        org_mask = (corpus["original"].str.len() >= lower) & (
-            corpus["original"].str.len() <= upper
+        org_mask = (corpus["original"].str.split().apply(len) >= lower) & (
+            corpus["original"].str.split().apply(len) <= upper
         )
-        cor_mask = (corpus["corrected"].str.len() >= lower) & (
-            corpus["corrected"].str.len() <= upper
+        cor_mask = (corpus["corrected"].str.split().apply(len) >= lower) & (
+            corpus["corrected"].str.split().apply(len) <= upper
         )
         mask = org_mask & cor_mask
         return corpus.loc[mask]
