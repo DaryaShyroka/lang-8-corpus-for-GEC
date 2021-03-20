@@ -84,22 +84,35 @@ var app = new Vue({
             anyNcorrections: false,
             anyLpoints: false,
             sentPairs: [],
-            url: '/corpus/request'
+            url: '/corpus/request/'
         }
     },
     methods: {
         getCorpus(e) {
             e.preventDefault();
+            wr = ''
+            lp = ''
+            if (this.searchData.wordRange[0] == -1 && this.searchData.wordRange[1] == -1) {
+                wr = '&wordRange=' + -1
+            }
+            else {
+                wr = '&wordRange=[' + this.searchData.wordRange[0] + ',' + this.searchData.wordRange[1] + "]"
+            }
+            if (this.searchData.Lpoints[0] == -1 && this.searchData.Lpoints[1] == -1) {
+                lp = '&Lpoints=' + -1
+            } else {
+                lp = '&Lpoints=[' + this.searchData.Lpoints[0] + ',' + this.searchData.Lpoints[1] + "]"
+            }
 
             urlParams = '?corpusType=' + this.searchData.corpusType +
                 '&agreementType=' + this.searchData.agreementType +
                 '&sentenceType=' + this.searchData.sentenceType +
-                '&wordRange=[' + this.searchData.wordRange[0] + ',' + this.searchData.wordRange[1] + ']' + 
+                wr +
                 '&nCorrections=' + this.searchData.nCorrections +
-                '&sex=' + this.searchData.sex + 
+                '&sex=' + this.searchData.sex +
                 '&occupation=' + this.searchData.occupation +
                 '&location=' + this.searchData.location +
-                '&Lpoints=[' + this.searchData.Lpoints[0] + ',' + this.searchData.Lpoints[1] + ']'
+                lp
 
             axios
                 .get(this.url + urlParams)
