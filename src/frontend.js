@@ -117,7 +117,7 @@ var app = new Vue({
             axios
                 .get(this.url + urlParams)
                 .then(response => {
-
+                    this.sentPairs = response.data
                 })
                 .catch(error => {
                     console.log(error)
