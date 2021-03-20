@@ -2,16 +2,18 @@ var app = new Vue({
     el: "#app",
     data() {
         return {
+            a: -1,
+            b: 1000,
             searchData: {
                 "corpusType": -1,  //0-unannotated, 1-annotated, -1 -both (any)
                 "agreementType": -1, //0 = 3 no's, 1 = 1 yes, 2 no's, 2 = 2 yeses 1 no, 3 = 3 yeses (if agreementType=-1, means any agreement type)
                 "sentenceType": -1, //0-original, 1-corrected, -1 -both (any)
-                "wordRange": [-1, -1], //based on 'sentenceType', sentences with word range in 10-20 inclusively (if wordRange = [-1,-1], means any word range)
-                "nCorrections": -1, //sentences with n corrections (-1 means any)
+                "wordRange": ['', ''], //based on 'sentenceType', sentences with word range in 10-20 inclusively (if wordRange = [-1,-1], means any word range)
+                "nCorrections": '', //sentences with n corrections (-1 means any)
                 "sex": -1, //0-male, 1-female, 2-other (-1 means any)
                 "occupation": -1, //(-1 means all :) )
                 "location": -1, //(-1 means all :) )
-                "Lpoints": [-1, -1] //Lpoints in the given range inclusively ([-1,-1] means any)
+                "Lpoints": ['', ''] //Lpoints in the given range inclusively ([-1,-1] means any)
             },
             corpusType: {
                 "description": 'make search from annotated/unannotated or both corpus',
@@ -84,31 +86,60 @@ var app = new Vue({
             anyNcorrections: false,
             anyLpoints: false,
             sentPairs: [],
-            url: '/corpus/request/'
+            url: '/corpus/request/',
+            ann: 1000
         }
     },
     methods: {
         getCorpus(e) {
             e.preventDefault();
+
+            if (this.searchData.wordRange[0] > this.searchData.wordRange[1] ||
+                (this.searchData.wordRange[0] == '' && this.searchData.wordRange[1] != '') ||
+                (this.searchData.wordRange[0] != '' && this.searchData.wordRange[1] == '') ||
+                (this.searchData.wordRange[0] < 0) ||
+                this.searchData.wordRange[1] > 1000) {
+                alert("Word range is incorrect")
+                return
+            }
+            if (this.searchData.Lpoints[0] > this.searchData.Lpoints[1] ||
+                (this.searchData.Lpoints[0] == '' && this.searchData.Lpoints[1] != '') ||
+                (this.searchData.Lpoints[0] != '' && this.searchData.Lpoints[1] == '') ||
+                this.searchData.Lpoints[0] < 0 ||
+                this.searchData.Lpoints[1] > 1000) {
+                alert("Lpoint range is incorrect")
+                return
+            }
+            if (this.searchData.nCorrections > 1000 || this.searchData.nCorrections < 0) {
+                alert("n-corrections is incorrect")
+                return
+            }
+            console.log('getting corpus')
             wr = ''
             lp = ''
-            if (this.searchData.wordRange[0] == -1 && this.searchData.wordRange[1] == -1) {
+            nc = ''
+            if (this.searchData.wordRange[0] == '' && this.searchData.wordRange[1] == '') {
                 wr = '&wordRange=' + -1
             }
             else {
                 wr = '&wordRange=[' + this.searchData.wordRange[0] + ',' + this.searchData.wordRange[1] + "]"
             }
-            if (this.searchData.Lpoints[0] == -1 && this.searchData.Lpoints[1] == -1) {
+            if (this.searchData.Lpoints[0] == '' && this.searchData.Lpoints[1] == '') {
                 lp = '&Lpoints=' + -1
             } else {
                 lp = '&Lpoints=[' + this.searchData.Lpoints[0] + ',' + this.searchData.Lpoints[1] + "]"
+            }
+            if (this.searchData.nCorrections == '') {
+                nc = '&nCorrections=' + -1
+            } else {
+                nc = '&nCorrections=' + this.searchData.nCorrections
             }
 
             urlParams = '?corpusType=' + this.searchData.corpusType +
                 '&agreementType=' + this.searchData.agreementType +
                 '&sentenceType=' + this.searchData.sentenceType +
                 wr +
-                '&nCorrections=' + this.searchData.nCorrections +
+                nc +
                 '&sex=' + this.searchData.sex +
                 '&occupation=' + this.searchData.occupation +
                 '&location=' + this.searchData.location +
@@ -238,17 +269,17 @@ var app = new Vue({
 
         anyNcorrections: function (newN, oldN) {
             if (newN == true) {
-                this.searchData.nCorrections = -1
+                this.searchData.nCorrections = ''
             }
         },
         anyWordRange: function (newWR, oldWR) {
             if (newWR == true) {
-                this.searchData.wordRange = [-1, -1]
+                this.searchData.wordRange = ['', '']
             }
         },
         anyLpoints: function (newLP, oldLP) {
             if (newLP == true) {
-                this.searchData.Lpoints = [-1, -1]
+                this.searchData.Lpoints = ['', '']
             }
         }
     }
