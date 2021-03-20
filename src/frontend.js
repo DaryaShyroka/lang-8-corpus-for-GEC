@@ -83,7 +83,8 @@ var app = new Vue({
             anyWordRange: false,
             anyNcorrections: false,
             anyLpoints: false,
-            sentPairs: []
+            sentPairs: [],
+            url: '/corpus/request'
         }
     },
     methods: {
@@ -101,7 +102,7 @@ var app = new Vue({
                 '&Lpoints=[' + this.searchData.Lpoints[0] + ',' + this.searchData.Lpoints[1] + ']'
 
             axios
-                .get(urlParams)
+                .get(this.url + urlParams)
                 .then(response => {
 
                 })
