@@ -48,7 +48,13 @@ METADATA_KEYS = {"sex", "occupation", "location", "Lpoints"}
 
 
 def construct_metadata_dict(param_dict):
-    """Construct the metadata dictionary based on param_dict provided"""
+    """Construct the metadata dictionary based on param_dict provided
+    Args:
+        param_dict (dict): dictionary of parameters
+    Returns:
+        dict: a dictionary with only metadata included
+    """
+
     new_dict = {}
 
     for k, v in param_dict.items():
@@ -71,26 +77,38 @@ def construct_metadata_dict(param_dict):
 def get_by_range(corpus, sent_type, num_range=(10, 15)):
     """Returns sentence pairs with only sentence length within num_range, sent_type
     is used to specify whether the restrictions are put on original or corrected sentences
+    Args:
+        corpus (dataFrame): A dataFrame to filter
+        sent_type (int): 0 means original sentences, 1 means corrected sentences and -1 means not care
+        num_range (tuple): A tuple contains lower and upper word counts in the sentences
+    Returns:
+        dataFrame: A subset of corpus filtered by the restrictions given
     """
     lower, upper = num_range
     if sent_type in SENT_TYPE_MAPS:
-        mask = (corpus[SENT_TYPE_MAPS[sent_type]].str.len() >= lower) & (
-            corpus[SENT_TYPE_MAPS[sent_type]].str.len() <= upper
+        mask = (corpus[SENT_TYPE_MAPS[sent_type]].str.split().apply(len) >= lower) & (
+            corpus[SENT_TYPE_MAPS[sent_type]].str.split().apply(len) <= upper
         )
         return corpus.loc[mask]
     else:
-        org_mask = (corpus["original"].str.len() >= lower) & (
-            corpus["original"].str.len() <= upper
+        org_mask = (corpus["original"].str.split().apply(len) >= lower) & (
+            corpus["original"].str.split().apply(len) <= upper
         )
-        cor_mask = (corpus["corrected"].str.len() >= lower) & (
-            corpus["corrected"].str.len() <= upper
+        cor_mask = (corpus["corrected"].str.split().apply(len) >= lower) & (
+            corpus["corrected"].str.split().apply(len) <= upper
         )
         mask = org_mask & cor_mask
         return corpus.loc[mask]
 
 
 def get_by_multiple_corrections(corpus, n_corrections):
-    """Return the sentences which only contains n number of corrections"""
+    """Return the sentences which only contains n number of corrections
+    Args:
+        corpus (dataFrame): A dataFrame to filter
+        n_corrections (int): An int represents how many corrections a sentence should have, -1 means not care
+    Returns:
+        dataFrame: A subset of corpus filtered by the restrictions given
+    """
     columns = CORPUS.columns.to_list()
     grouped = corpus.groupby("original").agg("count").reset_index()
     filtered = grouped[grouped["corrected"] >= n_corrections]
@@ -98,7 +116,13 @@ def get_by_multiple_corrections(corpus, n_corrections):
 
 
 def get_by_metadata(corpus, **args):
-    """Filter the corpus based on the args provided"""
+    """Filter the corpus based on the args provided
+     Args:
+        corpus (dataFrame): A dataFrame to filter
+        args (dict): A dictionary contains all metadata
+    Returns:
+        dataFrame: A subset of corpus filtered by the restrictions given
+    """
     if not len(args):
         return corpus
     query_str = " & ".join([f"{k} == '{v}'" for k, v in args.items() if k != "Lpoints"])
@@ -115,15 +139,34 @@ def get_by_metadata(corpus, **args):
 
 
 def get_dict_corpus(corpus, size=10):
-    """Return a part of the corpus based on the size"""
+    """Return a part of the corpus based on the size
+    Args:
+        corpus (dataFrame): A dataFrame to filter
+        size: (int): Number of rows to keep
+    Returns:
+        dataFrame: A subset of corpus whose size is restircted by 'size'
+    """
     return corpus[:size].T.to_dict("list")
 
 
 def extract_list(df, str_sentence):
+    """Convert a dataframe to a list
+    Args:
+        df (dataFrame): A dataFrame
+        str_sentence (str): The column to select
+    Returns:
+        list: A list extracted from df
+    """
     return df[str_sentence].tolist()
 
 
 def extract_pair_set(df):
+    """Convert a dataframe to a set of tuples
+    Args:
+        df (dataFrame): A dataframe
+    Returns:
+        set: A set of tuples which represents the dataframe
+    """
     original_list = extract_list(df, "original")
     corrected_list = extract_list(df, "corrected")
     sentence_pair_set = {
@@ -204,6 +247,12 @@ def annotation_search(
 
 
 def get_target_sents(args):
+    """Extract targeted sentences based on the given args
+    Args:
+        args ([dict]): A dictionary contains all parameters
+    Returns:
+        set: A set of 2-element tuples which contains original and corrected sentence pairs
+    """
 
     # Targeted corpus
     metadata_params = construct_metadata_dict(args)
@@ -232,11 +281,6 @@ def get_target_sents(args):
             ["original", "corrected"]
         ]
     return extract_pair_set(res)
-
-
-# def get_by_range(sent_type, range = (10, 15)):
-#     mask =  (CORPUS[sent_type].str.len() >= range[0]) & (CORPUS[sent_type].str.len() <= range[1])
-#     return CORPUS.loc[mask].T.to_dict('list')
 
 
 def get_profile(soup):

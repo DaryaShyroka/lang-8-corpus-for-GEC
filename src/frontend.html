@@ -20,7 +20,7 @@
           <!-- corpus type-->
           <div class="form-group" :title="corpusType.description">
             <label for="corpusType">Search from</label>
-            <select class="form-control" name="corpusType" v-model="searchData.corpusType">
+            <select class="form-control" name="corpusType" v-model.number="searchData.corpusType">
               <option v-for="(v,k) in corpusType.data" :value=v>{{k}}</option>
             </select>
           </div>
@@ -28,7 +28,7 @@
           <div class="form-group" :title="agreementType.description"
             v-if="searchData.corpusType == -1 || searchData.corpusType == 1">
             <label for="agreementType">Search by agreement</label>
-            <select class="form-control" name="agreementType" v-model="searchData.agreementType">
+            <select class="form-control" name="agreementType" v-model.number="searchData.agreementType">
               <option v-for="(v,k) in agreementType.data" :value=v>{{k}}</option>
             </select>
           </div>
@@ -40,9 +40,9 @@
             <input type="checkbox" v-model="anyWordRange" id="anyWordRange">
             <label for="anyWordRange">doesn't matter</label>
             <input type="number" class="form-control" id="fromRange" placeholder="from"
-              v-model="searchData.wordRange[0]" :disabled="anyWordRange">
+            v-model.number="searchData.wordRange[0]" :disabled="anyWordRange">
             <br>
-            <input type="number" class="form-control" id="toRange" placeholder="to" v-model="searchData.wordRange[1]"
+            <input type="number" class="form-control" id="toRange" placeholder="to" v-model.number="searchData.wordRange[1]"
               :disabled="anyWordRange">
           </div>
           <!-- sentence type-->
@@ -59,7 +59,7 @@
             title="Some sentences have more than one correction. Select a number, If you want sentences with n corrections">
             <label for="nCorrections">Sentences with n corrections</label>
             <input type="number" class="form-control" id="nCorrections" placeholder="n"
-              v-model="searchData.nCorrections" :disabled="anyNcorrections">
+            v-model.number="searchData.nCorrections" :disabled="anyNcorrections">
             <input type="checkbox" v-model="anyNcorrections" id="anyNcorrections">
             <label for="anyNcorrections">doesn't matter</label>
           </div>
@@ -67,29 +67,29 @@
           <!-- sex, occupation, location, Lpoints -->
           <div class="form-group" :title="sex.description">
             <label for="sex">Sex</label>
-            <select class="form-control" name="sex" v-model="searchData.sex">
+            <select class="form-control" name="sex" v-model.number="searchData.sex">
               <option v-for="(v,k) in sex.data" :value=v>{{k}}</option>
             </select>
           </div>
           <div class="form-group" :title="occupation.description">
             <label for="occupation">Occupation</label>
-            <select class="form-control" name="occupation" v-model="searchData.occupation">
+            <select class="form-control" name="occupation" v-model.number="searchData.occupation">
               <option v-for="(v,k) in occupation.data" :value=v>{{k}}</option>
             </select>
           </div>
           <div class="form-group" :title="location.description">
             <label for="location">Location</label>
-            <select class="form-control" name="location" v-model="searchData.location">
+            <select class="form-control" name="location" v-model.number="searchData.location">
               <option v-for="(v,k) in location.data" :value=v>{{k}}</option>
             </select>
           </div>
           <div class="form-group"
             title="Lpoints range (Lpoints is like a 'thumbs ups' a user received from other Lang8 users">
             <label>Lpoints</label>
-            <input type="number" class="form-control" id="fromLpoint" placeholder="from" v-model="searchData.Lpoints[0]"
+            <input type="number" class="form-control" id="fromLpoint" placeholder="from" v-model.number="searchData.Lpoints[0]"
               :disabled="anyLpoints">
             <br>
-            <input type="number" class="form-control" id="toLpoint" placeholder="to" v-model="searchData.Lpoints[1]"
+            <input type="number" class="form-control" id="toLpoint" placeholder="to" v-model.number="searchData.Lpoints[1]"
               :disabled="anyLpoints">
             <input type="checkbox" v-model="anyLpoints" id="anyLpoints">
             <label for="anyLpoints">doesn't matter</label>
@@ -98,7 +98,7 @@
         </form>
       </div>
       <!-- Table column -->
-      <div class="col-xs-5 col-sm-6 col-lg-5 rounded shadow">
+      <div class="col-xs-5 col-sm-6 col-lg-6 rounded shadow">
         <div class="tableFixHead">
           <table class="table table-bordered table-hover">
             <thead>
@@ -117,7 +117,7 @@
         </div>
       </div>
       <!-- Viz column -->
-      <div class="col-xs-6 col-sm-8 col-lg-5 rounded shadow viz">
+      <div class="col-xs-6 col-sm-8 col-lg-4 rounded shadow viz">
         <div id="piechart1"></div>
         <hr>
         <div id="piechart2"></div>
