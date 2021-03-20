@@ -55,3 +55,8 @@ You can combine several combination of these criteria.
 - Exmample 3: you want to see the pair of original and corrected sentences originally written by users whose occupation is a designer that have not been examined by the annotators:
     
     (Search from: unannotated corpus, occupation: Designer )
+    
+- Example 4: you want to see all the pair of sentences with at most 25 words:
+
+    (Search from: Both, Word Range: 1 in the first box and 25 in the second box - please note that you have to specify both minimum and maximum. 
+     They can be the same number in which case you are searching for sentences with exactly n words.)
