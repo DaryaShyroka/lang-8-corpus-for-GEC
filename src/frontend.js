@@ -145,11 +145,11 @@ var app = new Vue({
             var data = google.visualization.arrayToDataTable([
                 ['Task', 'Sentences with/without agreement'],
                 ['With agreement', 353],
-                ['Incorrect sentences', 197]
+                ['Without agreement', 197]
             ]);
 
             var options = {
-                title: 'Correct/Incorrect sentences in annotated corpus'
+                title: 'Sentences with/without agreement'
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
