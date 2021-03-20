@@ -8,7 +8,9 @@ from collections import defaultdict
 import re
 import pandas as pd
 
-CORPUS = pd.read_csv("data/final_corpus.csv", encoding="utf-8").fillna('').set_index("id")
+CORPUS = (
+    pd.read_csv("data/final_corpus.csv", encoding="utf-8").fillna("").set_index("id")
+)
 
 METADATA = pd.read_csv(
     "data/lang-8-users.csv", encoding="utf-8", dtype={"user_id": str}
@@ -225,10 +227,12 @@ def get_target_sents(args):
         res = res[res["agree"].isna()]
     else:
         res = res
-    res = get_by_range(res, args["sentenceType"], args["wordRange"])
-    res = get_by_multiple_corrections(res, args["nCorrections"])[
-        ["original", "corrected"]
-    ]
+    if args["wordRange"] != -1:
+        res = get_by_range(res, args["sentenceType"], args["wordRange"])
+    if args["nCorrections"] != -1:
+        res = get_by_multiple_corrections(res, args["nCorrections"])[
+            ["original", "corrected"]
+        ]
     return extract_pair_set(res)
 
 
