@@ -2,8 +2,6 @@ var app = new Vue({
     el: "#app",
     data() {
         return {
-            a: -1,
-            b: 1000,
             searchData: {
                 "corpusType": -1,  //0-unannotated, 1-annotated, -1 -both (any)
                 "agreementType": -1, //0 = 3 no's, 1 = 1 yes, 2 no's, 2 = 2 yeses 1 no, 3 = 3 yeses (if agreementType=-1, means any agreement type)
@@ -175,8 +173,8 @@ var app = new Vue({
         drawChart2() {
             var data = google.visualization.arrayToDataTable([
                 ['Task', 'Sentences with/without agreement'],
-                ['With agreement', 353],
-                ['Without agreement', 197]
+                ['With agreement', 325],
+                ['Without agreement', 225]
             ]);
 
             var options = {
