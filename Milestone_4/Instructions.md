@@ -10,7 +10,7 @@
 
 4. Create a Docker container by running the Docker image with internal and external ports both 9999:
 
-`docker run -p 9999:9999 <image_name>`
+`docker run -p 9999:9999 lang8_image`
 
 The output you see should look like:
 
@@ -35,7 +35,7 @@ The corpus contains the number of agreements from the annotators, as well as met
 
 ## Filter Criteria
 
-The frontend allows you to filter the sentences based on annotation characteristics such as number of annotator agreements, the number of words in the original or corrected sentences, and metadata such as sex, occupation and the user's current location. The query response shows the first 500 pairs which satisfy the filter criteria. 
+The frontend allows you to filter the sentences based on annotation characteristics such as number of annotator agreements, the number of words in the original or corrected sentences, and metadata such as sex, occupation and the user's current location. After you specify the criteria, please press the `Submit` button. The query response shows the first 500 pairs which satisfy the filter criteria. 
 
 - **Search from**: 
   
