@@ -18,6 +18,7 @@
 ## Dockerization and peer review instructions 
 - Please see `/src/Dockerfile, requirements.txt`([link to src directory](https://github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/tree/master/src))
 - The instructions and image are uploaded to the Google Drive. 
+- The dockerization and peer review [`instructions`](https://github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/blob/master/Milestone_4/Instructions.md) are available in the repository. 
 
 ## Improvement on Annotation
 - Pleae note that we received external help (Darya's brother) to correct annotation from one bad annotator.
