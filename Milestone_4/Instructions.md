@@ -10,7 +10,7 @@
 
 4. Create a Docker container by running the Docker image with internal and external ports both 9999:
 
-`docker run -p 9999:9999 lang8_image`
+`docker run -rm -p 9999:9999 lang8_image`
 
 The output you see should look like:
 
