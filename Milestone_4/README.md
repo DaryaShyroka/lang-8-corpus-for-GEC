@@ -5,14 +5,19 @@
 **The rest of the directories are for the use of the team only.**
 
 ## Python Back-end
-- Please see `/src/backend.py, helper.py`. ([link to src directory](https://github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/tree/master/src))
+- Please see `src/backend.py, helper.py`. ([link to src directory](https://github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/tree/master/src))
+- Our corpus consists of the set of original and corrected sentences written by language learners. The front end allows the user to apply various types of filters to search the corpus and see the search result. 
+  The corpus is annotated with the number of annotators who agree with the correction and this information can be easy accessed via `Search by agreement` criteria.  
                    
 ## HTML / Javascript Front-end
-- Please see `/src/frontend.css, frontend.html, frontend.js` ([link to src directory](https://github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/tree/master/src))
-- Please see [`/src/frontend.md`](https://github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/blob/master/src/frontend.md) for the frontend documentation. 
+- Please see [`src/frontend.html`](https://github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/blob/master/src/frontend.html). for the html file. 
+- Please see [`src/frontend.js.`](https://github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/blob/master/src/frontend.js) for the jsava script. 
+- Please see [`src/frontend.css`](https://github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/blob/master/src/frontend.css) for the css file. 
+- Please see [`src/frontend.md`](https://github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/blob/master/src/frontend.md) for the documentation.  for the frontend documentation. 
 
 ## Dockerization and peer review instructions 
 - Please see `/src/Dockerfile, requirements.txt`([link to src directory](https://github.ubc.ca/MDS-CL-2020-21/COLX523_Project_Group6/tree/master/src))
+- The instructions and image are uploaded to the Google Drive. 
 
 ## Improvement on Annotation
 - Pleae note that we received external help (Darya's brother) to correct annotation from one bad annotator.
