@@ -10,7 +10,12 @@
 
 4. Create a Docker container by running the Docker image with internal and external ports both 9999:
 
-`docker run -rm -p 9999:9999 lang8_image`
+`docker run -rm -p 9999:9999 <image_name>`
+
+where `<image_name>` is the image name you would like to give to the docker image.
+For example, if you would like to name the image as 'lang8_image', use the command:
+
+`docker run -rm -p 9999:9999 lang8_image`.
 
 The output you see should look like:
 
