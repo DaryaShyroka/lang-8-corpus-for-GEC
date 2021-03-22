@@ -9,22 +9,21 @@
 `docker load < colx_523_project_group_6.tar`
 
 4. Create a Docker container by running the Docker image with internal and external ports both 9999:
-
-`docker run -rm -p 9999:9999 <image_name>`
-
-where `<image_name>` is the image name you would like to give to the docker image.
-For example, if you would like to name the image as 'lang8_image', use the command:
-
+`docker run -rm -p 9999:9999 <image_name>` 
+ 
+ where `<image_name>` is the image name you would like to give to the docker image.
+ 
+ For example, if you would like to name the image as 'lang8_image', use the command:
 `docker run -rm -p 9999:9999 lang8_image`.
 
-The output you see should look like:
-
+ The output you see should look like:
 ``` 
 INFO:     Started server process [1]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:9999 (Press CTRL+C to quit)
 ```
+
 
 5. Open your brower and type `localhost:9999` in the URL. 
 
@@ -58,16 +57,22 @@ The frontend allows you to filter the sentences based on annotation characterist
 - **Word Range**: the number of words in the sentence. The top box is the minimum number of words and the box below is the maximum number of words in the sentence. 
   If you specify non-positive integer, the system will give you an error. You can also click on 'Does not matter' if you don't care about the word range. 
 
+
 - **Original or Corrected or Both**: If original is checked, the filter criteria is applied to original sentences. If corrected is checked, the filter criteria is applied to corrected sentences. 
   If you check both, the filters will be applied to both original sentences and corrected sentences. 
 
+
 - **Sentences with n corrections**: Some sentences have corrections offered by multiple native Speakers. You can search for sentence pairs where multiple corrections are offered. 
+
 
 - **Sex**: gender of the author of the original sentence
 
+
 - **Occupation**: occupation of the author of the original sentence
 
+
 - **Location**: current location of the author of the original sentence
+
 
 - **Lpoints**: points each user gains every time he / she makes corrections or receives Thanks points. Users with more Lpoints will be given preference, making them more likely to receive corrections. 
 
